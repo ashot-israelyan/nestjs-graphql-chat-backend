@@ -11,6 +11,7 @@ export class AuthService {
     private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
   ) {}
+
   async login(user: User, response: Response) {
     const expires = new Date();
     expires.setSeconds(
