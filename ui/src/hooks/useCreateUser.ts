@@ -5,7 +5,7 @@ interface CreateUserInput {
   createUserInput: {
     email: string;
     password: string;
-  }
+  };
 }
 
 const CREATE_USER = gql`

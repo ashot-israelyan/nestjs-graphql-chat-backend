@@ -5,12 +5,11 @@ import MuiSnackBar from '@mui/material/Snackbar';
 import { useReactiveVar } from '@apollo/client';
 import { snackVar } from '../../constants/snack';
 
-const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref,
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+const Alert = forwardRef<HTMLDivElement, AlertProps>(
+  function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  },
+);
 
 const Snackbar = () => {
   const snack = useReactiveVar(snackVar);
