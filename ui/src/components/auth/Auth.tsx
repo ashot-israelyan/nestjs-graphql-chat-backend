@@ -4,12 +4,14 @@ import { Button, Stack, TextField } from '@mui/material';
 interface AuthProps {
   submitLabel: string;
   onSubmit: (credentials: { email: string; password: string }) => Promise<void>;
+  error?: string;
 }
 
 const Auth: FC<PropsWithChildren<AuthProps>> = ({
   submitLabel,
   onSubmit,
   children,
+  error,
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,12 +35,16 @@ const Auth: FC<PropsWithChildren<AuthProps>> = ({
         variant="outlined"
         value={email}
         onChange={(event) => setEmail(event.target.value)}
+        error={!!error}
+        helperText={error}
       />
       <TextField
         type="password"
         label="Password"
         variant="outlined"
         value={password}
+        error={!!error}
+        helperText={error}
         onChange={(event) => setPassword(event.target.value)}
       />
       <Button variant="contained" onClick={() => onSubmit({ email, password })}>
