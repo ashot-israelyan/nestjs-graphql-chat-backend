@@ -11,7 +11,10 @@ const ChatList = () => {
 
   return (
     <>
-      <ChatListAdd open={chatListAddVisible} handleClose={() => setChatListAddVisible(false)} />
+      <ChatListAdd
+        open={chatListAddVisible}
+        handleClose={() => setChatListAddVisible(false)}
+      />
       <Stack>
         <ChatListHeader handleAddChat={() => setChatListAddVisible(true)} />
         <Divider />

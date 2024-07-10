@@ -22,13 +22,7 @@ const Guard: FC<PropsWithChildren> = ({ children }) => {
     }
   }, [error]);
 
-  return (
-    <>
-      {excludedRoutes.includes(path)
-        ? children
-        : user && children}
-    </>
-  );
+  return <>{excludedRoutes.includes(path) ? children : user && children}</>;
 };
 
 export default Guard;
