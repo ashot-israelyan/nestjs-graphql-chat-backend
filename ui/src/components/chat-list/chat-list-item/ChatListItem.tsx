@@ -4,8 +4,13 @@ import Avatar from '@mui/material/Avatar';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import { FC } from 'react';
 
-const ChatListItem = () => {
+interface ChatListProps {
+  name?: string | null;
+}
+
+const ChatListItem: FC<ChatListProps> = ({ name }) => {
   return (
     <>
       <ListItem alignItems="flex-start">
@@ -13,7 +18,7 @@ const ChatListItem = () => {
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
         <ListItemText
-          primary="Brunch the weekend?"
+          primary={name}
           secondary={
             <>
               <Typography
