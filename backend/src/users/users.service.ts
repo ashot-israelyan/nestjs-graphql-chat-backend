@@ -3,18 +3,14 @@ import {
   UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { UsersRepository } from './users.repository';
-import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
   constructor(private readonly usersRepository: UsersRepository) {}
-
-  private async hashPassword(password: string): Promise<string> {
-    return bcrypt.hash(password, 10);
-  }
 
   async create(createUserInput: CreateUserInput) {
     try {
@@ -26,9 +22,12 @@ export class UsersService {
       if (err.message.includes('E11000')) {
         throw new UnprocessableEntityException('Email already exists.');
       }
-
       throw err;
     }
+  }
+
+  private async hashPassword(password: string) {
+    return bcrypt.hash(password, 10);
   }
 
   async findAll() {
@@ -48,7 +47,9 @@ export class UsersService {
     return this.usersRepository.findOneAndUpdate(
       { _id },
       {
-        $set: updateUserInput,
+        $set: {
+          ...updateUserInput,
+        },
       },
     );
   }
@@ -60,11 +61,9 @@ export class UsersService {
   async verifyUser(email: string, password: string) {
     const user = await this.usersRepository.findOne({ email });
     const passwordIsValid = await bcrypt.compare(password, user.password);
-
     if (!passwordIsValid) {
       throw new UnauthorizedException('Credentials are not valid.');
     }
-
     return user;
   }
 }
