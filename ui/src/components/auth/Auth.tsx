@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useEffect, useState } from 'react';
+import { FC, PropsWithChildren, ReactNode, useEffect, useState } from 'react';
 import { Button, Stack, TextField } from '@mui/material';
 import useGetMe from '../../hooks/useGetMe';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ interface AuthProps {
   submitLabel: string;
   onSubmit: (credentials: { email: string; password: string }) => Promise<void>;
   error?: string;
+  extraFields?: ReactNode[];
 }
 
 const Auth: FC<PropsWithChildren<AuthProps>> = ({
@@ -14,6 +15,7 @@ const Auth: FC<PropsWithChildren<AuthProps>> = ({
   onSubmit,
   children,
   error,
+  extraFields,
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -45,6 +47,7 @@ const Auth: FC<PropsWithChildren<AuthProps>> = ({
         error={!!error}
         helperText={error}
       />
+      {extraFields}
       <TextField
         type="password"
         label="Password"
