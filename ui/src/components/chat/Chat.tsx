@@ -13,6 +13,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import useMessageCreated from '../../hooks/useMessageCreated';
 
 const Chat = () => {
   const [message, setMessage] = useState('');
@@ -25,6 +26,7 @@ const Chat = () => {
 
   const divRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
+  const { data: latestMessage } = useMessageCreated({ chatId });
 
   const scrollToBottom = () => divRef.current?.scrollIntoView();
 
@@ -50,11 +52,14 @@ const Chat = () => {
   return (
     <Stack sx={{ height: '100%', justifyContent: 'space-between' }}>
       <h1>{data?.chat.name}</h1>
-      <Box
-        sx={{ maxHeight: '70vh', overflow: 'auto' }}
-      >
-        {messages?.messages.map(message => (
-          <Grid key={message._id} container alignItems="center" marginBottom="1rem">
+      <Box sx={{ maxHeight: '70vh', overflow: 'auto' }}>
+        {messages?.messages.map((message) => (
+          <Grid
+            key={message._id}
+            container
+            alignItems="center"
+            marginBottom="1rem"
+          >
             <Grid item xs={2} lg={1}>
               <Avatar src="" sx={{ width: 52, height: 52 }} />
             </Grid>
@@ -81,7 +86,7 @@ const Chat = () => {
           justifySelf: 'flex-end',
           alignItems: 'center',
           width: '100%',
-          margin: "1rem 0"
+          margin: '1rem 0',
         }}
       >
         <InputBase
@@ -89,7 +94,7 @@ const Chat = () => {
           onChange={(event) => setMessage(event.target.value)}
           value={message}
           placeholder="Message"
-          onKeyDown={async event => {
+          onKeyDown={async (event) => {
             if (event.key === 'Enter') {
               await handleCreateMessage();
             }
