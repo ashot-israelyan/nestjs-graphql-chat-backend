@@ -36,7 +36,7 @@ export class AuthService {
     const authCookie = cookies.find((cookie) => {
       return cookie.includes('Authentication');
     });
-    const jwt = authCookie.split('Authentication')[1];
+    const jwt = authCookie.split('Authentication=')[1];
 
     return this.jwtService.verify(jwt);
   }
