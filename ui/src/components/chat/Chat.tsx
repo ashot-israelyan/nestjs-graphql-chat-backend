@@ -13,7 +13,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import useMessageCreated from '../../hooks/useMessageCreated';
 
 const Chat = () => {
   const [message, setMessage] = useState('');
@@ -26,8 +25,6 @@ const Chat = () => {
 
   const divRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
-
-  useMessageCreated({ chatId });
 
   const scrollToBottom = () => divRef.current?.scrollIntoView();
 
