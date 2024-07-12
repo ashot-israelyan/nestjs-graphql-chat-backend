@@ -1,11 +1,10 @@
 import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import { FC } from 'react';
-import ListItemButton from '@mui/material/ListItemButton';
+import { ListItemButton } from '@mui/material';
 import router from '../../Routes';
 import { Chat } from '../../../gql/graphql';
 
@@ -14,7 +13,7 @@ interface ChatListProps {
   selected: boolean;
 }
 
-const ChatListItem: FC<ChatListProps> = ({ chat, selected }) => {
+const ChatListItem = ({ chat, selected }: ChatListProps) => {
   return (
     <>
       <ListItem alignItems="flex-start" disablePadding>
@@ -23,7 +22,7 @@ const ChatListItem: FC<ChatListProps> = ({ chat, selected }) => {
           selected={selected}
         >
           <ListItemAvatar>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+            <Avatar alt="Remy Sharp" src="/static/iamages/avatar/1.jpg" />
           </ListItemAvatar>
           <ListItemText
             primary={chat.name}
