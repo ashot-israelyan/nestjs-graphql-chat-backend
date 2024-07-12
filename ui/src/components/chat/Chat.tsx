@@ -64,7 +64,7 @@ const Chat = () => {
   return (
     <Stack sx={{ height: '100%', justifyContent: 'space-between' }}>
       <h1>{data?.chat.name}</h1>
-      <Box sx={{ maxHeight: '70vh', overflow: 'auto' }}>
+      <Box sx={{ maxHeight: '75vh', overflow: 'auto' }}>
         <InfiniteScroll
           pageStart={0}
           isReverse={true}
