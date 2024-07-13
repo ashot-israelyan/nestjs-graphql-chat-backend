@@ -76,11 +76,9 @@ export class MessagesService {
       { $unset: 'userId' },
       { $set: { chatId } },
     ]);
-
     for (const message of messages) {
       message.user = this.usersService.toEntity(message.user);
     }
-
     return messages;
   }
 
