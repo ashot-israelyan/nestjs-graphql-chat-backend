@@ -22,7 +22,8 @@ const Chat = () => {
 
   const params = useParams();
   const chatId = params._id!;
-  const { data } = useGetChat({ _id: chatId });
+  const { data, error } = useGetChat({ _id: chatId });
+  console.log({ error });
   const [createMessage] = useCreateMessage();
   const { data: messages, fetchMore } = useGetMessages({
     chatId,
