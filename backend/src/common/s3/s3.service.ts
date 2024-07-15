@@ -7,12 +7,13 @@ import { FileUploadOptions } from './file-upload-options.interface';
 export class S3Service {
   private readonly client: S3Client;
 
-  constructor(configService: ConfigService) {
+  constructor(private configService: ConfigService) {
     const accessKeyId = configService.getOrThrow('AWS_ACCESS_KEY');
     const secretAccessKey = configService.getOrThrow('AWS_SECRET_ACCESS_KEY');
+    const region = configService.getOrThrow('AWS_REGION');
 
     const clientConfig: S3ClientConfig = {
-      region: 'eu-north-1',
+      region,
     };
 
     if (accessKeyId && secretAccessKey) {
@@ -36,6 +37,7 @@ export class S3Service {
   }
 
   getObjectUrl(bucket: string, key: string) {
-    return `https://${bucket}.s3.amazonaws.com/${key}`;
+    const region = this.configService.getOrThrow('AWS_REGION');
+    return `https://${bucket}.s3.${region}.amazonaws.com/${key}`;
   }
 }
