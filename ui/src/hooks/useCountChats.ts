@@ -13,7 +13,11 @@ const useCountChats = () => {
       return;
     }
 
-    setChatsCount(parseInt(await res.text()));
+    const count = await res.text();
+
+    console.log('chatCount', count);
+
+    setChatsCount(parseInt(count));
   }, []);
 
   return { chatsCount, countChats };

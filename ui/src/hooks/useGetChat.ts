@@ -11,6 +11,7 @@ const getChatDocument = graphql(`
 `);
 
 const useGetChat = (variables: ChatQueryVariables) => {
+  console.log(variables);
   return useQuery(getChatDocument, { variables });
 };
 

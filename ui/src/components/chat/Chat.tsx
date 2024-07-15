@@ -83,7 +83,7 @@ const Chat = () => {
           }
           useWindow={false}
         >
-          {messages &&
+          {messages ? (
             [...messages.messages]
               .sort((messageA, messageB) => {
                 return (
@@ -131,7 +131,10 @@ const Chat = () => {
                     </Stack>
                   </Grid>
                 </Grid>
-              ))}
+              ))
+          ) : (
+            <div></div>
+          )}
           <div ref={divRef} />
         </InfiniteScroll>
       </Box>

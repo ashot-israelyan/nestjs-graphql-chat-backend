@@ -23,7 +23,7 @@ export class ChatsService {
 
   async findMany(
     prePipelineStages: PipelineStage[] = [],
-    paginationArgs?: PaginationArgs,
+    paginationArgs: PaginationArgs = { skip: 0, limit: 15 },
   ) {
     const chats = await this.chatsRepository.model.aggregate([
       ...prePipelineStages,
@@ -73,7 +73,7 @@ export class ChatsService {
 
   async findOne(_id: string) {
     const chats = await this.findMany([
-      { $match: { chatId: new Types.ObjectId(_id) } },
+      { $match: { _id: new Types.ObjectId(_id) } },
     ]);
     if (!chats[0]) {
       throw new NotFoundException(`No chat was found with ID ${_id}`);
