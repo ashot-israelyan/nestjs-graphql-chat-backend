@@ -13,6 +13,7 @@ async function bootstrap() {
   app.useLogger(app.get(Logger));
   app.use(cookieParser());
   app.enableCors();
+  app.setGlobalPrefix('/api');
 
   await app.listen(configService.getOrThrow('PORT'));
 }

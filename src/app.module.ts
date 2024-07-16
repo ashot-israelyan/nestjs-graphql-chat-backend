@@ -28,7 +28,9 @@ import { Request } from 'express';
         return {
           autoSchemaFile: true,
           cors: true,
+          path: '/api/graphql',
           subscriptions: {
+            path: '/api/graphql',
             'graphql-ws': {
               onConnect: (context: any) => {
                 try {
